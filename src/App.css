@@ -1,38 +1,320 @@
-.App {
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR STYLES START*/
+nav {
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.top-line {
+  margin-inline: auto;
+  width: 95%;
+  height: 1px;
+  background-color: #00171f24;
+  margin-bottom: 1.2rem;
+}
+nav .menu-link {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: unset;
+  padding: unset;
+  margin-inline: 2rem;
+}
+
+nav .menu-link li {
+  list-style-type: none;
+}
+
+nav .menu-link a {
+  color: #00171f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@keyframes pulsate {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+nav .menu-link li:hover {
+  animation: pulsate 0.8s ease-in-out infinite both;
+}
+
+@media screen and (max-width: 768px) {
+  nav ul {
+    text-align: center;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+/* DROPDOWN */
+
+/* .auth-link {
+  margin-left: auto;
+  padding-right: 1.2rem;
+}
+
+.auth-menu {
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #e7ecef;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  width: 200px;
+  padding: 1.2rem;
+}
+
+.dropdown form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown form div {
+  margin-bottom: 10px;
+}
+
+.dropdown form button {
+  font-family: "montserrat", sans-serif;
+  font-weight: 700;
+  background-color: #f6ae2d;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  color: #00171f;
+  cursor: pointer;
+}
+
+.dropdown form button:hover {
+  color: #e7ecef;
+  transform: scale(1.01);
+  transition: 0.2s;
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown ul li:hover {
+  background-color: #e7ecef;
+} */
+/* NAVBAR STYLES END */
+
+/* MAPS STYLES START */
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leaflet-container {
+  border-radius: 15px;
+  width: 95%;
+  height: 70vh;
+}
+
+.cluster-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  /* -webkit-clip-path: url(#pet_shape);
+  clip-path: url(#pet_shape); */
+  outline: 2px solid red;
+  background-color: rgba(255, 0, 0, 0.534);
+  transform: translate(-25%, -25%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* MAPS STYLES END */
+
+/* FOOTER STYLES START*/
+.footer,
+.social {
+  list-style-type: none;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin: unset;
+  padding: unset;
+  margin-inline: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer > li {
+  font-weight: 600;
+}
+
+.footer li:hover {
+  animation: pulsate 0.8s ease-in-out infinite both;
+}
+
+.social img {
+  width: 35px;
+  cursor: pointer;
+}
+
+.social li:hover {
+  animation: pulsate 0.8s ease-in-out infinite both;
+}
+.social_text {
+  text-align: center;
+}
+.footer a {
+  color: #00171f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bottom-line {
+  margin-inline: auto;
+  width: 95%;
+  height: 1px;
+  background-color: #00171f24;
+  margin-block: 1.2rem;
+}
+
+.footer > small {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.rights {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 1.2rem;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-width: 768px) {
+  .footer {
+    text-align: center;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+/* FOOTER STYLES END */
+
+/* BUTTONS STYLES START */
+
+/* MORE BUTTON */
+.btn-52,
+.btn-52 *,
+.btn-52 :after,
+.btn-52 :before,
+.btn-52:after,
+.btn-52:before {
+  border: 0;
+  box-sizing: border-box;
+}
+.btn-52 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #f6ae2d;
+  background-image: none;
+  color: #e7ecef;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+    Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#00171f, #e7ecef);
+  padding: 0;
+}
+.btn-52:disabled {
+  cursor: default;
+}
+.btn-52:-moz-focusring {
+  outline: auto;
+}
+.btn-52 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-52 [hidden] {
+  display: none;
+}
+.btn-52 {
+  border: 1px solid;
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  overflow: hidden;
+  padding: 1.2rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+.btn-52 .original {
+  background: #e7ecef;
+  color: #00171f;
+  display: grid;
+  inset: 0;
+  place-content: center;
+  position: absolute;
+  transition: transform 0.2s;
+}
+.btn-52:hover .original {
+  transform: translateY(100%);
+}
+.btn-52 .letters {
+  display: inline-flex;
+}
+.btn-52 span {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-52:hover span {
+  opacity: 1;
+  transform: translateY(0);
+}
+.btn-52:hover span:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.btn-52:hover span:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.btn-52:hover span:nth-child(4) {
+  transition-delay: 0.3s;
+}
+.btn-52:hover span:nth-child(5) {
+  transition-delay: 0.4s;
+}
+.btn-52:hover span:nth-child(6) {
+  transition-delay: 0.5s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* BUTTONS STYLES END */
