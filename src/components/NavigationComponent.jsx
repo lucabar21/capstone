@@ -1,75 +1,63 @@
-// import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { login, logout } from "../redux/actions/authActions";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/reducers/authSlice";
 
 const NavigationComponent = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [showDropdown, setShowDropdown] = useState(false);
-  // const dispatch = useDispatch();
-  // const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth?.user);
 
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   dispatch(login({ email, password }));
-  //   setShowDropdown(false);
-  // };
+  const handleLogout = () => {
+    dispatch(logout());
 
-  // const handleLogout = () => {
-  //   dispatch(logout());
-  // };
-
-  // const toggleDropdown = () => {
-  //   setShowDropdown(!showDropdown);
-  // };
-
-  // const stopPropagation = (e) => {
-  //   e.stopPropagation();
-  // };
+    //Reinderizzo alla homepage e refresho la pagina per evitare di
+    //rimanere in pagine dove sono richiesti oggetti user che possono dare errori.
+    navigate("/");
+    window.location.reload();
+  };
 
   return (
     <div className="container-fluid">
       <nav>
         <ul className="menu-link">
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/ads">Annunci</a>
+            <Link to="/ads">Annunci</Link>
           </li>
           <li>
-            <a href="/about">Chi siamo</a>
+            <Link to="/mission">Mission</Link>
           </li>
           <li>
-            <a href="/contact">Contatti</a>
+            <Link to="/contact">Contatti</Link>
+          </li>
+          <li>
+            <Link to={user ? "/add" : "/login"}>Inserisci Annuncio</Link>
           </li>
         </ul>
-        {/* <ul className="auth-link">
-          <li className="auth-menu" onClick={toggleDropdown}>
-            {user ? user.name : "Login"}
-            {showDropdown && (
-              <div className="dropdown" onClick={stopPropagation}>
-                {user ? (
-                  <ul>
-                    <li onClick={handleLogout}>Logout</li>
-                  </ul>
-                ) : (
-                  <form onSubmit={handleLogin}>
-                    <div>
-                      <label>Email:</label>
-                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    </div>
-                    <div>
-                      <label>Password:</label>
-                      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    </div>
-                    <button type="submit">Accedi</button>
-                  </form>
-                )}
-              </div>
-            )}
-          </li>
-        </ul> */}
+
+        <ul className="menu-link" style={{ marginLeft: "auto" }}>
+          {!user ? (
+            <>
+              <Link to="/login">
+                <button className="log-btn">Accedi</button>
+              </Link>
+              <Link to="/register">
+                <button className="log-btn">Registrati</button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <li>
+                <a href="/dashboard">{user?.name}</a>
+              </li>
+              <button className="log-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          )}
+        </ul>
       </nav>
       <div className="top-line"></div>
     </div>

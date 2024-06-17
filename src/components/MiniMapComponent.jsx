@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAds } from "../redux/actions";
 import { Link } from "react-router-dom";
 import SearchBarComponent from "./SearchBarComponent";
-import GeolocationComponent from "./GeolocationComponent";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -19,44 +18,57 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const MapComponent = () => {
-  const ads = useSelector((state) => state.ads.data);
-  const dispatch = useDispatch();
-  const [markers, setMarkers] = useState([]);
+const LocationMarker = ({ setLatLng }) => {
+  const [position, setPosition] = useState(null);
 
-  useEffect(() => {
-    dispatch(getAds());
-  }, [dispatch]);
+  useMapEvents({
+    click(e) {
+      setPosition(e.latlng);
+      setLatLng(e.latlng);
+    },
+  });
+
+  return position === null ? null : <Marker position={position} />;
+};
+
+const MiniMapComponent = ({ setLatLng }) => {
+  // const ads = useSelector((state) => state.ads.data);
+  // const dispatch = useDispatch();
+  // const [markers, setMarkers] = useState([]);
+
+  // useEffect(() => {
+  //   dispatch(getAds());
+  // }, [dispatch]);
 
   // Qui riempio l'array di oggetti marker dallo stato globale degli annunci correlati
-  useEffect(() => {
-    if (ads && ads.length > 0) {
-      const adsMarkers = ads.map((ad) => {
-        return {
-          id: ad.id,
-          geoCode: [parseFloat(ad.latitude), parseFloat(ad.longitude)],
-          popUp: `${ad.title}`,
-        };
-      });
-      setMarkers(adsMarkers);
-    }
-  }, [ads]);
+  // useEffect(() => {
+  //   if (ads && ads.length > 0) {
+  //     const adsMarkers = ads.map((ad) => {
+  //       return {
+  //         id: ad.id,
+  //         geoCode: [parseFloat(ad.latitude), parseFloat(ad.longitude)],
+  //         popUp: `${ad.title}`,
+  //       };
+  //     });
+  //     setMarkers(adsMarkers);
+  //   }
+  // }, [ads]);
 
-  const customCluster = (cluster) => {
-    return new divIcon({
-      html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
-      className: "custom-marker-icon",
-      iconSize: [38, 38, true],
-    });
-  };
+  // const customCluster = (cluster) => {
+  //   return new divIcon({
+  //     html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
+  //     className: "custom-marker-icon",
+  //     iconSize: [38, 38, true],
+  //   });
+  // };
 
-  // Qui definisco le icone personalizzate per i diversi annunci
+  // // Qui definisco le icone personalizzate per i diversi annunci
 
-  const dogIcon = new Icon({
-    iconUrl: "https://img.icons8.com/color/48/dog.png",
-    // iconUrl: require('../../public/nomefile.svg'), per immagini caricate direttamente dal progetto
-    iconSize: [38, 38],
-  });
+  // const dogIcon = new Icon({
+  //   iconUrl: "https://img.icons8.com/color/48/dog.png",
+  //   // iconUrl: require('../../public/nomefile.svg'), per immagini caricate direttamente dal progetto
+  //   iconSize: [38, 38],
+  // });
 
   // const catIcon = new Icon({
   //   iconUrl: "https://img.icons8.com/color/48/cat--v1.png",
@@ -64,7 +76,7 @@ const MapComponent = () => {
   // });
 
   return (
-    <div className="map-container">
+    <div className="mini-map-container">
       <MapContainer center={[41.5357, 12.3242]} zoom={5.5} scrollWheelZoom={true} doubleClickZoom={true}>
         <SearchBarComponent />
         <TileLayer
@@ -72,8 +84,8 @@ const MapComponent = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {/* Qui mappo i vari marker e gli do le informazioni prese dall'array. */}
-        <MarkerClusterGroup chunkedLoading iconCreateFunction={customCluster}>
-          {markers.map((marker) => (
+        <MarkerClusterGroup chunkedLoading>
+          {/* {markers.map((marker) => (
             <Marker key={marker.id} position={marker.geoCode} icon={dogIcon}>
               <Popup>
                 <div className="marker-popup">
@@ -84,11 +96,11 @@ const MapComponent = () => {
                 </div>
               </Popup>
             </Marker>
-          ))}
+          ))} */}
         </MarkerClusterGroup>
-        <GeolocationComponent />
+        <LocationMarker setLatLng={setLatLng} />
       </MapContainer>
     </div>
   );
 };
-export default MapComponent;
+export default MiniMapComponent;

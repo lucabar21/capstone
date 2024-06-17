@@ -1,7 +1,7 @@
-const MoreBtn = ({ text }) => {
+const MoreBtn = () => {
   return (
-    <button className="btn-52">
-      <div className="original">{text}</div>
+    <button className="btn-53">
+      <div className="original">Inserisci un annuncio</div>
       <div className="letters">
         <span>A</span>
         <span>N</span>
