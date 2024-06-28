@@ -43,40 +43,42 @@ const Register = () => {
       });
   };
   return (
-    <div className="register-container">
-      <h3>Registrati e diventa un Pet's Super Hero!</h3>
-      <form action="">
-        <div className="custom-input">
-          <label htmlFor="name">Nome</label>
-          <input type="text" id="name" onChange={(e) => setName(e.target.value)} required />
-        </div>
-        <div className="custom-input">
-          <label htmlFor="surname">Cognome</label>
-          <input type="text" id="surname" onChange={(e) => setSurname(e.target.value)} required />
-        </div>
-        <div className="custom-input">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div className="custom-input">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div className="custom-input">
-          <label htmlFor="password_confirmation">Conferma password</label>
-          <input
-            type="password"
-            id="password_confirmation"
-            onChange={(e) => setPasswordConf(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" onClick={submitForm}>
-          Registrati
-        </button>
-      </form>
-      {errors && <div className="error-login">{errors}</div>}
-    </div>
+    <main>
+      <div className="register-container">
+        <h3>Registrati e diventa un Pet's Super Hero!</h3>
+        <form action="">
+          <div className="custom-input">
+            <label htmlFor="name">Nome</label>
+            <input type="text" id="name" onChange={(e) => setName(e.target.value)} required />
+          </div>
+          <div className="custom-input">
+            <label htmlFor="surname">Cognome</label>
+            <input type="text" id="surname" onChange={(e) => setSurname(e.target.value)} required />
+          </div>
+          <div className="custom-input">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div className="custom-input">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <div className="custom-input">
+            <label htmlFor="password_confirmation">Conferma password</label>
+            <input
+              type="password"
+              id="password_confirmation"
+              onChange={(e) => setPasswordConf(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" onClick={submitForm}>
+            Registrati
+          </button>
+        </form>
+        {errors && <div className="error-login">{errors}</div>}
+      </div>
+    </main>
   );
 };
 export default Register;

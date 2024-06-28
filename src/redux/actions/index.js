@@ -1,4 +1,5 @@
 export const GET_DATA = "GET_DATA";
+export const GET_IMAGES = "GET_IMAGES";
 
 // ADS FETCH
 export const getAds = () => {
@@ -9,6 +10,19 @@ export const getAds = () => {
       .then((response) => response.json())
 
       .then((data) => dispatch({ type: GET_DATA, payload: data }))
+      .catch((error) => console.log(error));
+  };
+};
+
+// IMAGES FETCH
+export const getIamges = () => {
+  return (dispatch, getState) => {
+    const URL = "http://127.0.0.1:8000/api/images";
+
+    fetch(URL)
+      .then((response) => response.json())
+
+      .then((data) => dispatch({ type: GET_IMAGES, payload: data }))
       .catch((error) => console.log(error));
   };
 };

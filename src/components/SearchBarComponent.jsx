@@ -25,6 +25,7 @@ const SearchBarComponent = () => {
       provider,
       style: "bar",
       searchLabel: "Cerca località",
+      showMarker: false,
     });
 
     map.addControl(searchControl);

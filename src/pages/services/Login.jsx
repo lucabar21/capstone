@@ -36,30 +36,37 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h3>Sei già un Pet's Super Hero? Accedi qui</h3>
-      <form onSubmit={submitForm}>
-        <div className="custom-input">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div className="custom-input">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>{" "}
-        {error && <div className="error-login">{error}</div>}
-        <Link to="/register">
-          <span>Non sei ancora un Pet's Super Hero?</span>
-        </Link>
-        <button type="submit">Accedi</button>
-      </form>
-    </div>
+    <main>
+      <div className="login-container">
+        <h3>Sei già un Pet's Super Hero? Accedi qui</h3>
+        <form onSubmit={submitForm}>
+          <div className="custom-input">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div className="custom-input">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>{" "}
+          {error && <div className="error-login">{error}</div>}
+          <div className="related-text-login">
+            <Link to="/forgot-password">
+              <span>Hai dimenticato la password?</span>
+            </Link>
+            <Link to="/register">
+              <span>Non sei ancora un Pet's Super Hero?</span>
+            </Link>
+          </div>
+          <button type="submit">Accedi</button>
+        </form>
+      </div>
+    </main>
   );
 };
 export default Login;

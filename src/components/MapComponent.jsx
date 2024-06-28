@@ -19,7 +19,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const MapComponent = () => {
+const MapComponent = ({ category }) => {
   const ads = useSelector((state) => state.ads.data);
   const dispatch = useDispatch();
   const [markers, setMarkers] = useState([]);
@@ -31,16 +31,18 @@ const MapComponent = () => {
   // Qui riempio l'array di oggetti marker dallo stato globale degli annunci correlati
   useEffect(() => {
     if (ads && ads.length > 0) {
-      const adsMarkers = ads.map((ad) => {
+      const filteredAds = category !== 0 ? ads.filter((ad) => ad.categories.some((cat) => cat.id === category)) : ads;
+      const adsMarkers = filteredAds.map((ad) => {
         return {
           id: ad.id,
+          category: ad.categories[0].id,
           geoCode: [parseFloat(ad.latitude), parseFloat(ad.longitude)],
           popUp: `${ad.title}`,
         };
       });
       setMarkers(adsMarkers);
     }
-  }, [ads]);
+  }, [ads, category]);
 
   const customCluster = (cluster) => {
     return new divIcon({
@@ -58,10 +60,14 @@ const MapComponent = () => {
     iconSize: [38, 38],
   });
 
-  // const catIcon = new Icon({
-  //   iconUrl: "https://img.icons8.com/color/48/cat--v1.png",
-  //   iconSize: [30, 30],
-  // });
+  const catIcon = new Icon({
+    iconUrl: "https://img.icons8.com/color/48/cat--v1.png",
+    iconSize: [30, 30],
+  });
+  const otherIcon = new Icon({
+    iconUrl: "https://img.icons8.com/arcade/64/search-for-love.png",
+    iconSize: [30, 30],
+  });
 
   return (
     <div className="map-container">
@@ -73,18 +79,23 @@ const MapComponent = () => {
         />
         {/* Qui mappo i vari marker e gli do le informazioni prese dall'array. */}
         <MarkerClusterGroup chunkedLoading iconCreateFunction={customCluster}>
-          {markers.map((marker) => (
-            <Marker key={marker.id} position={marker.geoCode} icon={dogIcon}>
-              <Popup>
-                <div className="marker-popup">
-                  <span>{marker.popUp}</span>
-                  <Link to={`/ad/` + marker.id}>
-                    <button>Vai</button>
-                  </Link>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
+          {markers &&
+            markers.map((marker) => (
+              <Marker
+                key={marker.id}
+                position={marker.geoCode}
+                icon={marker.category === 1 ? dogIcon : marker.category === 2 ? catIcon : otherIcon}
+              >
+                <Popup>
+                  <div className="marker-popup">
+                    <span>{marker.popUp}</span>
+                    <Link to={`/ad/` + marker.id}>
+                      <button>Vai</button>
+                    </Link>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
         </MarkerClusterGroup>
         <GeolocationComponent />
       </MapContainer>

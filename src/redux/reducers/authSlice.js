@@ -24,12 +24,6 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
-
-      // Imposta un timeout per il logout dopo 60 minuti
-      state.logoutTimer = setTimeout(() => {
-        state = removeAuthData();
-        state.logoutTimer = null;
-      }, 60 * 60 * 1000); // 60 minuti
     },
     logout(state) {
       state = removeAuthData();

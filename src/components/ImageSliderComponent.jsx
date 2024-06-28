@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const ImageSliderComponent = ({ images }) => {
   //   Funzioni per abilitare lo scroll orizzontale su un evento onClick.
-  console.log(images);
   const slideLeft = () => {
     const slider = document.getElementById("slider-img");
     slider.scrollLeft = slider.scrollLeft - 400;
@@ -28,7 +27,7 @@ const ImageSliderComponent = ({ images }) => {
 
   const singleImg = () => {
     const slider = document.getElementById("slider-img");
-    if (images.length <= 1) {
+    if (images.length <= 2) {
       slider.style = "justify-content: center";
     }
   };

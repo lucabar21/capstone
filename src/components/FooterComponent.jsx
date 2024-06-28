@@ -1,28 +1,38 @@
+import { Link } from "react-router-dom";
+
 const FooterComponent = () => {
   return (
     <footer>
       <div className="bottom-line"></div>
 
-      <h3 className="social_text">SEGUI E CONDIVIDI SU</h3>
+      <h3 className="social_text">SEGUICI E CONDIVIDI SU</h3>
 
       <ul className="social">
         <li>
-          <img src={`${process.env.PUBLIC_URL}/fb.png`} alt="facebook" />
+          <a href="https://www.facebook.com">
+            <img src={`${process.env.PUBLIC_URL}/fb.png`} alt="facebook" />
+          </a>
         </li>
         <li>
-          <img src={`${process.env.PUBLIC_URL}/ig.png`} alt="instagram" />
+          <a href="https://www.instagram.com/">
+            <img src={`${process.env.PUBLIC_URL}/ig.png`} alt="instagram" />
+          </a>
         </li>
         <li>
-          <img src={`${process.env.PUBLIC_URL}/yt.png`} alt="youtube" />
+          <a href="https://www.tiktok.com/">
+            <img src={`${process.env.PUBLIC_URL}/tt.png`} alt="tik tok" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.whatsapp.com/">
+            <img src={`${process.env.PUBLIC_URL}/wa.png`} alt="whatsApp" />
+          </a>
         </li>
       </ul>
 
       <ul className="footer">
         <li>
-          <a href="/">Servizio Clienti</a>
-        </li>
-        <li>
-          <a href="/">Privacy Policy</a>
+          <Link to={"/contact"}>Inviaci un feedback</Link>
         </li>
       </ul>
       <div className="rights">

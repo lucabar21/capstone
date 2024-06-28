@@ -6,11 +6,14 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IoMdCheckbox } from "react-icons/io";
 
+import { IoIosArrowDropdownCircle } from "react-icons/io";
+
 const AddAd = () => {
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   const [modal, setModal] = useState(null);
   const [error, setError] = useState(null);
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
@@ -119,87 +122,148 @@ const AddAd = () => {
     }
   };
 
+  const handleDropdown = () => {
+    if (show === false) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+
   return (
-    <div className="contact-container">
-      <h3>Inserisci un annuncio!</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="custom-input">
-          <fieldset>
-            <input
-              type="radio"
-              id="category"
-              name="categories"
-              value="1"
-              checked={formData.category === "1"}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="category">Cani</label>
-            <FaDog />
+    <main>
+      <div className="rules">
+        <h1>
+          Ti serve aiuto?
+          <IoIosArrowDropdownCircle onClick={handleDropdown} />
+        </h1>
+        {show && (
+          <div className="rules-drop">
+            <h4>
+              Il nostro sito ti permette di creare annunci per animali ritrovati in modo semplice e veloce. Segui questi
+              passaggi per pubblicare il tuo annuncio:
+            </h4>
+            <div>
+              <h6>Punto 1</h6>
+              <p> Seleziona la categoria dell'annuncio che meglio descrive l'animale ritrovato.</p>
+            </div>
+            <div>
+              <h6>Punto 2</h6>
+              <p> Scrivi un titolo breve ma esplicativo che aiuti a identificare l'animale rapidamente.</p>
+            </div>
+            <div>
+              <h6>Punto 3</h6>
+              <p>
+                Fornisci una descrizione dettagliata dell'animale, le circostanze del ritrovamento e aggiungi delle
+                informazioni di contatto.
+              </p>
+            </div>
+            <div>
+              {" "}
+              <h6>Punto 4</h6>
+              <p>
+                Carica delle immagini che possano descrivere al meglio la situazione del ritrovamento e la tipologia di
+                animale in questione. Le immagini sono spesso la parte più attrattiva di un annuncio, sfruttiamola a
+                favore dei nostri amici che di bellezza ne hanno da vendere!
+              </p>
+            </div>
+            <div>
+              <h6>Punto 5</h6>
+              <p>
+                {" "}
+                Alla fine, seleziona un punto sulla mappa per geolocalizzare il tuo annuncio. Questo aiuterà i
+                proprietari a capire dove è stato ritrovato l'animale.
+              </p>
+            </div>
 
-            <input
-              type="radio"
-              id="category"
-              name="categories"
-              value="2"
-              checked={formData.category === "2"}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="category">Gatti</label>
-            <FaCat />
+            <h5>
+              Ti preghiamo di rispettare queste poche e semplici linee guida per permettere all'annuncio di avere il
+              giusto seguito ed aiutare l'animale in difficoltà.
+            </h5>
+          </div>
+        )}
+      </div>
+      <div className="adAdd-container">
+        <h3>Inserisci un annuncio!</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="custom-input">
+            <fieldset>
+              <div>
+                <input
+                  type="radio"
+                  id="category"
+                  name="categories"
+                  value="1"
+                  checked={formData.category === "1"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="category_1">Cani</label>
+                <FaDog />
+              </div>
 
-            <input
-              type="radio"
-              id="category"
-              name="categories"
-              value="3"
-              checked={formData.category === "3"}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="category">Altri</label>
-            <FaHandHoldingHeart />
-          </fieldset>
-        </div>
-        <div className="custom-input-title">
-          <input
-            type="text"
-            id="title"
-            placeholder="Titolo"
-            value={formData.title}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+              <div>
+                <input
+                  type="radio"
+                  id="category"
+                  name="categories"
+                  value="2"
+                  checked={formData.category === "2"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="category">Gatti</label>
+                <FaCat />
+              </div>
 
-        <div className="custom-textarea">
-          <textarea
-            id="description"
-            cols="200"
-            rows="12"
-            placeholder="Descrizione annuncio..."
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="custom-input">
-          <label htmlFor="images" className="custom-file-upload">
-            Seleziona immagini
-          </label>
-          <input type="file" id="images" onChange={handleFileChange} multiple />
-          {images.length > 0 && (
-            <span className="file-check">
-              {images.length} <IoMdCheckbox />
-            </span>
-          )}
-        </div>
-        {modal && <div className="error-login">{modal}</div>}
-        <MiniMapComponent setLatLng={setLatLng} />
-        <input type="hidden" id="latitude" value={latLng.lat} readOnly required />
-        <input type="hidden" id="longitude" value={latLng.lng} readOnly required />
-        {error && <div className="error-login">{error}</div>}
-        <button type="submit">Invia</button>
-      </form>
-    </div>
+              <div>
+                <input
+                  type="radio"
+                  id="category"
+                  name="categories"
+                  value="3"
+                  checked={formData.category === "3"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="category">Altri</label>
+                <FaHandHoldingHeart />
+              </div>
+            </fieldset>
+          </div>
+          <div className="custom-input-title">
+            <label htmlFor="title">Titolo</label>
+            <input type="text" id="title" value={formData.title} onChange={handleInputChange} required />
+          </div>
+
+          <div className="custom-textarea">
+            <textarea
+              id="description"
+              cols="200"
+              rows="12"
+              placeholder="Descrizione annuncio..."
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="custom-input">
+            <label htmlFor="images" className="custom-file-upload">
+              Seleziona immagini
+            </label>
+            <input type="file" id="images" onChange={handleFileChange} multiple />
+            {images.length > 0 && (
+              <span className="file-check">
+                {images.length} <IoMdCheckbox />
+              </span>
+            )}
+          </div>
+          {modal && <div className="error-login">{modal}</div>}
+          <MiniMapComponent setLatLng={setLatLng} />
+          <input type="hidden" id="latitude" value={latLng.lat} readOnly required />
+          <input type="hidden" id="longitude" value={latLng.lng} readOnly required />
+          {error && <div className="error-login">{error}</div>}
+          <button type="submit">Pubblica</button>
+        </form>
+      </div>
+    </main>
   );
 };
 

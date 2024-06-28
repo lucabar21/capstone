@@ -1,42 +1,77 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getAds } from "../redux/actions";
-import CardSliderComponent from "../components/CardSliderComponent";
-import MapComponent from "../components/MapComponent";
+import { useEffect, useState } from "react";
+
+import { GiHamburgerMenu } from "react-icons/gi";
+import PaginationAds from "./PaginationAds";
 
 const Ads = () => {
-  // const ads = useSelector((state) => state.ads.data);
-  const dispatch = useDispatch();
+  const [category, setCategory] = useState(0);
+
+  const handleCategories = (value) => {
+    setCategory(value);
+    console.log(value);
+  };
+
+  const displayBtn = () => {
+    const btns = document.getElementsByClassName("filter-btn");
+    const windowWidth = window.innerWidth;
+
+    for (let i = 0; i < btns.length; i++) {
+      if (windowWidth < 768) {
+        if (btns[i].style.display === "none") {
+          btns[i].style.display = "flex";
+        } else {
+          btns[i].style.display = "none";
+        }
+      } else {
+        btns[i].style.display = "flex";
+      }
+    }
+  };
 
   useEffect(() => {
-    dispatch(getAds());
-  }, [dispatch]);
+    window.addEventListener("resize", displayBtn);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", displayBtn);
+    };
+  }, []);
 
   return (
-    <div className="ads-container">
-      {/* <h3>CONTROLLA GLI ANNUNCI</h3> */}
-      <CardSliderComponent />
-      <MapComponent />
-      {/* {ads &&
-        ads.map((ad, i) => (
-          <div className="ads-row" key={i}>
-            {ads[i].images.map((image) => (
-              <img src={image.url} alt="descriptive_photo" key={i} />
-            ))}
-            <div className="ads-text">
-              <h1>{ad.title}</h1>
-              <p>{ad.description}</p>
-            </div>
-            <div className="comment-container">
-              {ads[i].comments.map((comment) => (
-                <small key={comment.id}>
-                  {comment.user} - {comment.content}
-                </small>
-              ))}
-            </div>
+    <main>
+      <div className="ads-container">
+        <div className="ads-text">
+          <h3>Regala una nuova vita ad un animale: Scopri chi ti sta aspettando...</h3>
+          <p>
+            Esplora i nostri annunci per conoscere gli adorabili animali che sono alla ricerca di una nuova casa. Ogni
+            cucciolo, cane o gatto ha una storia unica e un cuore pieno di amore da condividere. Scopri il tuo nuovo
+            amico a quattro zampe e offrigli la seconda opportunità che merita. Adottare non solo cambierà la loro vita,
+            ma riempirà la tua di gioia e compagnia.
+          </p>
+        </div>
+        <div className="filter-btn-container">
+          <div>
+            <p>Filtra gli annunci per categoria:</p>{" "}
+            <span className="hamburger" onClick={displayBtn}>
+              <GiHamburgerMenu />
+            </span>
           </div>
-        ))} */}
-    </div>
+          <button className="log-btn filter-btn" onClick={() => handleCategories(0)}>
+            Tutti
+          </button>
+          <button className="log-btn filter-btn" onClick={() => handleCategories(1)}>
+            Cani
+          </button>
+          <button className="log-btn filter-btn" onClick={() => handleCategories(2)}>
+            Gatti
+          </button>
+          <button className="log-btn filter-btn" onClick={() => handleCategories(3)}>
+            Altri Animali
+          </button>
+        </div>
+        <PaginationAds category={category} />
+      </div>
+    </main>
   );
 };
 export default Ads;

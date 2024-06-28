@@ -1,36 +1,40 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getIamges } from "../redux/actions";
+import Spinner from "../components/sub_components/Spinner";
 
 const ImageShow = () => {
-  const [images, setImages] = useState(null);
+  const navigate = useNavigate();
+  const images = useSelector((state) => state.media.file);
+  const dispatch = useDispatch();
   const { ImageId } = useParams();
 
-  const ImageRequest = () => {
-    fetch("http://localhost:8000/api/images")
-      .then((response) => response.json())
-      .then((ImageData) => {
-        setImages(ImageData);
-      })
-      .catch((error) => console.log(error));
-  };
-
   useEffect(() => {
-    ImageRequest();
-  }, [ImageId]);
+    dispatch(getIamges());
+  }, [dispatch]);
 
   const image = images ? images.find((singleImage) => singleImage.id === parseInt(ImageId, 10)) : null;
-
+  if (!image) {
+    navigate("/ads");
+  }
   const goBack = () => {
     window.history.back();
   };
 
   return (
-    <div className="image-show">
-      {image && <img src={`http://localhost:8000/storage/${image.url}`} alt="Immagine descrittiva pet" />}
-      <button className="log-btn" onClick={goBack}>
-        Indietro
-      </button>
-    </div>
+    <main>
+      {image ? (
+        <div className="image-show">
+          {image && <img src={`http://localhost:8000/storage/${image.url}`} alt="Immagine descrittiva pet" />}
+          <button className="log-btn" onClick={goBack}>
+            Indietro
+          </button>
+        </div>
+      ) : (
+        <Spinner />
+      )}
+    </main>
   );
 };
 export default ImageShow;
