@@ -73,7 +73,7 @@ const PaginationAds = ({ category }) => {
   }, [dispatch]);
   return (
     <>
-      {slides.length > 0 ? (
+      {slides.length > 0 && (
         <>
           <div className="pagination-container">
             {currentAds.map((ad, i) => (
@@ -112,8 +112,6 @@ const PaginationAds = ({ category }) => {
             </button>
           </div>
         </>
-      ) : (
-        <Spinner />
       )}
     </>
   );

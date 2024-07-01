@@ -10,35 +10,35 @@ const Homepage = () => {
   const user = useSelector((state) => state.auth.user);
 
   const [category, setCategory] = useState(0);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleCategories = (value) => {
     setCategory(value);
     console.log(value);
   };
 
-  const displayBtn = () => {
-    const btns = document.getElementsByClassName("filter-btn");
-    const windowWidth = window.innerWidth;
+  const handleDropdown = () => {
+    if (isOpen === true) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
 
-    for (let i = 0; i < btns.length; i++) {
-      if (windowWidth < 768) {
-        if (btns[i].style.display === "none") {
-          btns[i].style.display = "flex";
-        } else {
-          btns[i].style.display = "none";
-        }
-      } else {
-        btns[i].style.display = "flex";
-      }
+  // Funzioni per fare in modo che la navbar sia sempre attiva nel momento in cui sei in modalità tablet o superiore.
+  const handleResize = () => {
+    if (window.innerWidth > 768) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    window.addEventListener("resize", displayBtn);
-
-    // Clean up the event listener on component unmount
+    window.addEventListener("resize", handleResize);
+    handleResize();
     return () => {
-      window.removeEventListener("resize", displayBtn);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -86,22 +86,26 @@ const Homepage = () => {
           <div className="filter-btn-container">
             <div>
               <p>Filtra gli annunci per categoria:</p>{" "}
-              <span className="hamburger" onClick={displayBtn}>
+              <span className="hamburger" onClick={handleDropdown}>
                 <GiHamburgerMenu />
               </span>
             </div>
-            <button className="log-btn filter-btn" onClick={() => handleCategories(0)}>
-              Tutti
-            </button>
-            <button className="log-btn filter-btn" onClick={() => handleCategories(1)}>
-              Cani
-            </button>
-            <button className="log-btn filter-btn" onClick={() => handleCategories(2)}>
-              Gatti
-            </button>
-            <button className="log-btn filter-btn" onClick={() => handleCategories(3)}>
-              Altri Animali
-            </button>
+            {isOpen && (
+              <div className="btn-filter-drop">
+                <button className="log-btn filter-btn" onClick={() => handleCategories(0)}>
+                  Tutti
+                </button>
+                <button className="log-btn filter-btn" onClick={() => handleCategories(1)}>
+                  Cani
+                </button>
+                <button className="log-btn filter-btn" onClick={() => handleCategories(2)}>
+                  Gatti
+                </button>
+                <button className="log-btn filter-btn" onClick={() => handleCategories(3)}>
+                  Altri Animali
+                </button>
+              </div>
+            )}
           </div>
           <MapComponent category={category} />
         </div>

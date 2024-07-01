@@ -6,9 +6,12 @@
   font-family: "Raleway", sans-serif;
   font-family: "Montserrat", sans-serif;
 }
-
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 main {
-  min-height: calc(100vh - 208px);
+  min-height: calc(100vh - 180px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -129,7 +132,7 @@ nav .menu-link li:hover {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  display: none;
+  display: flex;
 }
 .hamburger > svg {
   color: #ffffff;
@@ -156,9 +159,9 @@ nav .menu-link li:hover {
     gap: 0.8rem;
     margin-left: 0 !important;
   }
-  .hamburger {
+  /* .hamburger {
     display: flex;
-  }
+  } */
 }
 
 /* .dropdown-trigger {
@@ -908,6 +911,12 @@ nav .menu-link li:hover {
   gap: 0.5rem;
 }
 
+.btn-filter-drop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
 .placeholder {
   width: 80vw;
   height: 600px;
@@ -1840,7 +1849,7 @@ label {
   padding: 1.2rem;
   gap: 0.5rem;
   overflow-y: scroll;
-  max-height: 525px;
+  max-height: 575px;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -2555,9 +2564,13 @@ footer {
     text-align: center;
   }
 
-  .filter-btn-container button {
-    display: none;
+  .btn-filter-drop {
+    flex-direction: column;
   }
+
+  /* .filter-btn-container button {
+    display: none;
+  } */
   #main-slider-container {
     height: 255px;
   }
