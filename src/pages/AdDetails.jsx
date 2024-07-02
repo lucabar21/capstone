@@ -161,7 +161,7 @@ const AdDetails = () => {
               )}
             </div>
           )}
-          <h3 className="ads-h3" style={{ margin: "0" }}>
+          <h3 className="ads-h3-extra" style={{ margin: "0" }}>
             Scopri altri annunci
           </h3>
           <CardSliderComponent />

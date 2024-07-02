@@ -132,7 +132,7 @@ nav .menu-link li:hover {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  display: flex;
+  display: none;
 }
 .hamburger > svg {
   color: #ffffff;
@@ -159,9 +159,9 @@ nav .menu-link li:hover {
     gap: 0.8rem;
     margin-left: 0 !important;
   }
-  /* .hamburger {
+  .hamburger {
     display: flex;
-  } */
+  }
 }
 
 /* .dropdown-trigger {
@@ -817,6 +817,7 @@ nav .menu-link li:hover {
 .rules > h1 svg {
   cursor: pointer;
   font-size: 1.5rem;
+  animation: pulsate-fwd 0.7s ease-in-out infinite both;
 }
 @keyframes pulsate-fwd {
   0% {
@@ -833,9 +834,9 @@ nav .menu-link li:hover {
   }
 }
 
-.rules > h1 svg:hover {
+/* .rules > h1 svg:hover {
   animation: pulsate-fwd 0.7s ease-in-out infinite both;
-}
+} */
 .rules-drop {
   display: flex;
   flex-direction: column;
@@ -1979,6 +1980,19 @@ label {
 
 .ads-h3 {
   width: 100%;
+  margin-inline: auto;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #f6ae2d;
+  padding: 0.5rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 8px 2px -5px rgba(0, 0, 0, 0.1);
+}
+.ads-h3-extra {
+  width: 80vw;
+  margin: 0;
   margin-inline: auto;
   font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;

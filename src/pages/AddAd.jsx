@@ -134,7 +134,7 @@ const AddAd = () => {
     <main>
       <div className="rules">
         <h1>
-          Ti serve aiuto?
+          Accetta un consiglio.
           <IoIosArrowDropdownCircle onClick={handleDropdown} />
         </h1>
         {show && (
