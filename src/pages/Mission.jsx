@@ -13,7 +13,7 @@ const Mission = () => {
               famiglie amorevoli che possono offrirgli una casa sicura e affettuosa.
             </p>
             <div className="mission-img">
-              <img src={`${process.env.PUBLIC_URL}/paw_bridge.png`} alt="paw bridge" />
+              <img src={`${process.env.PUBLIC_URL}/PawBridge.png`} alt="paw bridge" />
             </div>
           </div>
         </div>
